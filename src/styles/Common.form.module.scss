@@ -1,0 +1,194 @@
+@import './colors.scss';
+
+.commonForm {
+  @media (min-width: 1250px) {
+    position: relative;
+    width: 1050px;
+    height: 700px;
+    margin: auto;
+
+    text-align: center;
+
+    form {
+      display: grid;
+      position: absolute;
+      top: 0;
+      right: 0;
+      grid-template-areas: 
+        "title"
+        "error"
+        "inputs"
+        "ln"
+        "submit";
+      
+      grid-template-rows: 20% 8% 32% 15% 15%;
+      width: 50%;
+      height: 100%;
+
+      background: rgba(0,0,0, 0.8);
+      
+      h2 {
+        grid-area: title;
+
+        font-size: 2.2rem;
+        letter-spacing: 7px;
+      }
+
+      .links {
+        display: flex;
+        grid-area: ln;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        width: 75%;
+        padding: 0 12.5%;
+      
+        button {
+          border: none;
+          outline: none;
+
+          background: transparent;
+
+          color: white;
+          font-size: 0.8em;
+          text-decoration: none;
+
+          cursor: pointer;
+        }
+      }
+
+      .inputContainer {
+        display: flex;
+        grid-area: inputs;
+        flex-direction: column;
+        justify-content: center;
+
+
+        input[type=text], input[type=password], select {
+          border: 0;
+          outline: none;
+
+          background: transparent;
+
+          color: $secondary-color;
+        }
+
+        option {
+          background: rgba(0, 0, 0, 1)
+        }
+
+        input[type=text], input[type=password], .select {
+          width: 75%;
+          margin: auto;
+          margin: 8px auto;
+          padding: 20px 0px;
+
+          border-bottom: 1px solid white;
+
+          font-size: 0.9em;
+
+          select {
+            width: 100%;
+            height: 100%;
+
+            font-size: 1em;
+          }
+        }
+
+        input[type=checkbox] {
+          display: none;
+        }
+
+        label {
+          content: "";
+
+          display: block;
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          margin-right: 10px;
+
+          transition: all 0.3s ease-in-out;
+
+          border: 3px solid white;
+          border-radius: 50%;
+
+          background: transparent;
+
+          cursor: pointer;
+        }
+
+        input::placeholder {
+          color:rgb(173, 173, 173);
+        }
+
+      }
+
+      .formError {
+        display: flex;
+        visibility: visible;
+      
+        grid-area: error;
+        justify-content: center;
+        width: 100%;
+
+        transition: visibility 0.3s, opacity 0.3s linear;
+
+        border-bottom: none;
+
+        opacity: 1;
+
+        color: indianred;
+        text-align: center;
+      }
+
+      .errorMessage {
+        width: 300px;
+        margin: auto;
+
+        font-size: 0.9em;
+      }
+    }
+
+    input[type=submit] {
+      align-self: center;
+      width: 75%;
+      height: 40px;
+
+      transition: background 0.8s ease-in-out;
+
+      border: 0;
+      border-radius: 3px;
+
+      background: $primary-color;
+
+      color: #fff;
+      font-size: 0.8em;
+
+      cursor: pointer;
+      justify-self: center;
+    }
+    
+    input[type=submit]:hover {
+      background: $darkened-primary-color;
+    }
+    
+    input[type=submit]:disabled {
+      background: $tertiary-color;
+
+      color: #fff;
+
+      cursor: not-allowed;
+    }
+
+    .mirrored {
+      transform: scaleX(-1);
+    }
+
+    .hidden {
+      visibility: hidden;
+
+      opacity: 0;
+    }
+  }
+}

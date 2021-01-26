@@ -1,0 +1,128 @@
+@import "./colors.scss";
+
+.wordStyle {
+  display: grid;
+  min-height: 100vh;
+  margin: auto;
+
+  font-size: 22px;
+
+  
+  @media (min-width: 1250px) {
+    grid-column-gap: 100px;
+    grid-template-areas:
+      "wordList kanjiList"
+      "wordList kanjiList";
+
+    grid-template-columns:66% 34%;
+    max-width: 1250px;
+  }
+
+  .kanjiList {
+    display: flex;
+    grid-area: kanjiList;
+    flex-direction: column;
+
+    
+    .kanjiInfo {
+      display: grid;
+
+      grid-template-areas:
+        "kanji meanings references"
+        "count meanings references"
+        ".     meanings references";
+      grid-template-columns: 105px auto 90px;
+      padding: 15px;
+
+      border: 1px solid $primary-color;
+      
+      .kanji, .strokeCount, .meanings, .references {
+        line-height: 1.75em;
+      }
+
+      .kanji, .strokeCount {
+        padding-right: 15px;
+
+        text-align: center;
+      }
+      .kanji {
+        grid-area: kanji;
+
+        font-size: 3.0em;
+      }
+
+      .strokeCount {
+        font-size: 0.6em;
+
+      }
+
+      .meanings {
+        grid-area: meanings;
+
+        font-size: 0.80em;
+      }
+
+      .references {
+        grid-area: references;
+
+        font-size: 0.7em;
+        text-align: end;
+      }
+    }
+  }
+
+  .wordList {
+    grid-area: wordList;
+    .singleWord {
+      display: grid;
+      .dictionaryWord { grid-area: word; }
+      .sensesContainer { grid-area: sensesContainer; }
+      .otherForms {
+        display: flex;
+        grid-area: otherForms;
+        flex-direction: column;
+    }
+
+      @media (min-width: 1250px) {
+        grid-template-areas: 
+          "word word           "
+          ".    sensesContainer"
+          ".    otherForms     ";
+        
+        grid-template-columns: 17% 83%;
+        margin-bottom: 40px;
+        .dictionaryWord {
+          font-size: 1.7em;
+        }
+
+        .sensesContainer {
+          .sense {
+            padding-bottom: 20px;
+
+            .pos {
+              font-size: 0.7em;
+            }
+          
+            .tags {
+              margin-left: 15px;
+
+              font-size: 0.7em;
+            }
+
+            .definitions {
+              font-size: 1.15em;
+            }
+          }
+        }
+        
+        .of-title {
+          font-size: 0.6em;
+        }
+
+        .otherForms {
+          font-size: 1.25em;
+        }
+      }
+    }
+  }
+}

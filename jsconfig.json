@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@contexts": ["./contexts/index.jsx"],
+      "@styles/*": ["./styles/*"],
+      "@utils": ["./utils/index.js"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

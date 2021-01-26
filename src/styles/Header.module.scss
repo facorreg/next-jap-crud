@@ -1,0 +1,41 @@
+@import "./colors.scss";
+
+.header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-content: center;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 70px;
+
+  border-bottom: 1px solid $primary-color;
+
+  background: $main-color;
+
+  -webkit-box-shadow: 0px 2px 6px 1px $primary-color;
+  box-shadow: 0px 2px 6px 1px $primary-color; 
+
+  .menu {
+    display: flex;
+    
+    .menuButton {
+      width: 150px;
+      max-height: 2.2em;
+      margin: 20px 0;
+
+      font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+      font-size: 0.8em;
+      letter-spacing: 7px;
+      line-height: 2.2em;
+      text-align: center;
+
+      cursor: pointer;
+    }
+  
+    .menuButton:last-of-type {
+      margin-right: 20px;
+    }
+  }
+}

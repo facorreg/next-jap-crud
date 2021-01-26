@@ -1,0 +1,18 @@
+@import './colors.scss';
+
+html,
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background: $main-color;
+
+  color: white;
+
+  font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+
+  & > * {
+    padding-top: 70px;
+  }
+}
