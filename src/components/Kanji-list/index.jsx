@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useAtom } from 'jotai';
 import PropTypes from 'proptypes';
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { ModalContext } from '@contexts';
+import { openModalAtom } from '@atoms';
 import styles from '@styles/Word.module.scss';
 
 const KanjiList = ({ kanjiList }) => {
-  const { openModal } = useContext(ModalContext);
+  const [, openModal] = useAtom(openModalAtom);
   const onClickHandler = (props) => () => {
     openModal('kanji', props);
   };

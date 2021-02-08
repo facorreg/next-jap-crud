@@ -6,7 +6,8 @@
       "@hooks/*": ["./hooks/*"],
       "@contexts": ["./contexts/index.jsx"],
       "@styles/*": ["./styles/*"],
-      "@utils": ["./utils/index.js"]
+      "@utils": ["./utils/index.js"],
+      "@atoms": ["./atoms/index.js"]
     }
   },
   "exclude": ["node_modules"]

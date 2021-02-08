@@ -1,13 +1,13 @@
-import { useContext } from 'react';
+import { useAtom } from 'jotai';
 
-import { ModalContext } from '@contexts';
+import { openModalAtom } from '@atoms';
 import styles from '@styles/Header.module.scss';
 
 import MultiLanguageButton from './MutliLanguageButton';
 
 const Header = () => {
-  const { openModal } = useContext(ModalContext);
-  const openModalHandler = (modalName) => () => openModal(modalName);
+  const [, openModal] = useAtom(openModalAtom);
+  const openModalHandler = (modalName) => () => openModal({ modalName });
   const isAuthenticated = false;
 
   return (

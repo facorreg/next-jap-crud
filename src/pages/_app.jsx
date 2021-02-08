@@ -1,24 +1,12 @@
 import '@styles/globals.scss';
+import { Provider } from 'jotai';
 import Head from 'next/head';
 import PropTypes from 'proptypes';
 
-import ForgotForm from '@components/Forgot.form';
 import Header from '@components/Header';
-import LoginForm from '@components/Login.form';
 import Modal from '@components/Modal';
-import RegisterForm from '@components/Register.form';
 
 function MyApp({ Component, pageProps }) {
-  const modalComponents = {
-    forgot: ForgotForm,
-    // kanji: KanjiPage,
-    login: LoginForm,
-    register: RegisterForm,
-    // createDeck: CreateDeck,
-    // createCard: CreateCard,
-    // dialog: Dialog,
-  };
-
   return (
     <>
       <Head>
@@ -29,10 +17,11 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
-      <Modal modalComponents={modalComponents}>
+      <Provider>
+        <Modal />
         <Header />
         <Component {...pageProps} />
-      </Modal>
+      </Provider>
     </>
   );
 }
