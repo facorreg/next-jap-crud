@@ -8,7 +8,7 @@ import Modal from '@components/Modal';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div id="japApp">
       <Head>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
         <Header />
         <Component {...pageProps} />
       </Provider>
-    </>
+    </div>
   );
 }
 

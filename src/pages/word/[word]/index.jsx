@@ -6,11 +6,11 @@ import Furigana from '@components/Furigana';
 import KanjiList from '@components/Kanji-list';
 import OtherForms from '@components/OtherForms';
 import WordSenses from '@components/WordSenses';
+import { kanjiPropTypes } from '@propTypes';
 import styles from '@styles/Word.module.scss';
 import { flattenDeep } from '@utils';
 
 const WordPage = (props) => {
-  console.log('so...', props);
   const { words } = props;
   const kanjiList = flattenDeep(words?.map(({ kanji }) => kanji));
 
@@ -68,7 +68,7 @@ WordPage.propTypes = {
       senses: PropTypes.arrayOf(
         PropTypes.shape({
           definitions: PropTypes.string,
-          examples: PropTypes.arrayOf(PropTypes.string),
+          examples: PropTypes.arrayOf(kanjiPropTypes.kanji),
           partsOfSpeech: PropTypes.string,
           tags: PropTypes.string,
         }),

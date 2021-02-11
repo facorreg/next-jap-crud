@@ -5,6 +5,7 @@ import flattenDeep from './flatten-deep';
 import getEnv from './get-env';
 import isArray from './is-array';
 import isEmpty from './is-empty';
+import isSSG from './is-ssg';
 import last from './last';
 import omit from './omit';
 import pick from './pick';
@@ -22,4 +23,5 @@ export {
   pick,
   omit,
   isEmpty,
+  isSSG,
 };

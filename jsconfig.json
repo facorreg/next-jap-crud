@@ -7,7 +7,8 @@
       "@contexts": ["./contexts/index.jsx"],
       "@styles/*": ["./styles/*"],
       "@utils": ["./utils/index.js"],
-      "@atoms": ["./atoms/index.js"]
+      "@atoms": ["./atoms/index.js"],
+      "@propTypes": ["./propTypes/index.js"]
     }
   },
   "exclude": ["node_modules"]
