@@ -1,12 +1,13 @@
 import { atom } from 'jotai';
 
 import ForgotForm from '@components/Forgot.form';
+import KanjiPage from '@components/KanjiDetails';
 import LoginForm from '@components/Login.form';
 import RegisterForm from '@components/Register.form';
 
 const modals = {
   forgot: ForgotForm,
-  // kanji: KanjiPage,
+  kanji: KanjiPage,
   login: LoginForm,
   register: RegisterForm,
   // createDeck: CreateDeck,

@@ -9,9 +9,7 @@ import styles from '@styles/Word.module.scss';
 
 const KanjiList = ({ kanjiList }) => {
   const [, openModal] = useAtom(openModalAtom);
-  const onClickHandler = (props) => () => {
-    openModal('kanji', props);
-  };
+  const openModalHandler = (props) => () => openModal({ modalName: 'kanji', props });
 
   return (
     <div className={styles.kanjiList}>
@@ -27,7 +25,7 @@ const KanjiList = ({ kanjiList }) => {
         } = kanji;
         return (
           <div className={styles.kanjiInfo} key={id}>
-            <div className={styles.kanji} onClick={onClickHandler({ kanji })}>
+            <div className={styles.kanji} onClick={openModalHandler({ kanji })}>
               {character}
             </div>
             {count && <div className={styles.strokeCount}>strokes: {count}</div>}
