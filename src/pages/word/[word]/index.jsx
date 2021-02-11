@@ -10,6 +10,7 @@ import styles from '@styles/Word.module.scss';
 import { flattenDeep } from '@utils';
 
 const WordPage = (props) => {
+  console.log('so...', props);
   const { words } = props;
   const kanjiList = flattenDeep(words?.map(({ kanji }) => kanji));
 
@@ -40,14 +41,13 @@ export const getStaticPaths = async () => {
   }));
 
   return {
-    fallback: false,
+    fallback: true,
     paths,
   };
 };
 
 export const getStaticProps = async (context) => {
   const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
-
   return {
     props: {
       words: res?.data,
