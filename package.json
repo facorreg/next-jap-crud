@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
+    "dotenv": "^8.2.0",
     "escape-string-regexp": "^4.0.0",
     "jotai": "^0.12.5",
     "next": "10.0.5",

@@ -52,6 +52,7 @@ export const getStaticProps = async (context) => {
     props: {
       words: res?.data,
     },
+    revalidate: 1,
   };
 };
 
