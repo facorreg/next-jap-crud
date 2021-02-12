@@ -44,7 +44,7 @@ const ownKeyDownHandler = (readingsByWord) => {
     if (event.keyCode === RIGHT || event.keyCode === LEFT) {
       updatemainIndex(event.keyCode === RIGHT ? 1 : -1);
     } else if (event.keyCode === UP || event.keyCode === DOWN) {
-      updatesecondaryIndex(event.keyCode === UP ? 1 : -1);
+      updatesecondaryIndex(event.keyCode === DOWN ? 1 : -1);
     }
   };
 

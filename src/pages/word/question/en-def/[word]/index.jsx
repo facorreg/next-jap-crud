@@ -1,7 +1,7 @@
 import axios from 'axios';
 import PropTypes from 'proptypes';
 
-import Furigana from '@components/Furigana';
+// import Furigana from '@components/Furigana';
 import ownKeyDownHandler from '@hooks/ownDirKeyDownHandler';
 import { kanjiPropTypes } from '@propTypes';
 import styles from '@styles/Question.module.scss';
@@ -11,19 +11,20 @@ const WordQuestion = (props) => {
   const { words } = props;
 
   if (!words) return null;
-  const readingsByWord = words.map(({ japanese }) => japanese.length);
+  const sensesByWord = words.map(({ senses }) => senses.length);
 
-  const [mainIndex, secondaryIndex] = ownKeyDownHandler(readingsByWord);
-
+  const [mainIndex, secondaryIndex] = ownKeyDownHandler(sensesByWord);
+  // const mainIndex = 0;
+  // const secondaryIndex = 0;
   return (
     <div className={styles.questionContainer}>
-      <Furigana {...(words[mainIndex]?.japanese[secondaryIndex] || {})} cName="question" />
+      <div>{words[mainIndex].senses[secondaryIndex]?.definitions}</div>
       <br />
       <div className={styles.infos}>
         word: {mainIndex + 1} / {words.length}
       </div>
       <div className={styles.infos}>
-        reading: {secondaryIndex + 1} / {words[mainIndex].japanese.length}
+        definition: {secondaryIndex + 1} / {words[mainIndex].senses.length}
       </div>
     </div>
   );
