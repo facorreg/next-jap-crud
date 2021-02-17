@@ -1,4 +1,9 @@
 @import "./colors.scss";
+@import "./Word-example.module.scss";
+
+/*
+  @todo: move furigana styles elsewhere
+*/
 
 .wordStyle {
   display: grid;
@@ -6,7 +11,7 @@
   margin: auto;
   margin-top: 100px;
 
-  font-size: 2rem;
+  font-size: 2.4rem;
 
   @media (min-width: 1250px) {
     grid-column-gap: 100px;
@@ -125,4 +130,25 @@
       }
     }
   }
+}
+
+.wExfurignaContainer {
+  display: inline-block;
+  position: relative;
+}
+
+.wExfurignaContainer:hover {
+  padding: 10px;
+
+  letter-spacing: 2px;
+
+  // font-size: 2em;
+}
+
+.wExfurigna {
+  display: inline-block;
+}
+
+.wExfurignaContainer:hover div:nth-child(2) { // Ugly but it would not access it by its className
+  display: block;
 }

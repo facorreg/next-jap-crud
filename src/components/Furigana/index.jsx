@@ -23,27 +23,38 @@ const stringWithFurigana = (word, furigana) => {
   return word.replace(allKanji, callback);
 };
 
-const Furigana = ({ cName, reading, word }) => {
+const Furigana = ({ children, cName, containerCName, reading, style, word }) => {
   const actualWord = word || reading;
   const furigana = word ? reading : '';
 
+  if (!actualWord) return <div />;
+
   return (
-    <div
-      className={styles[cName]}
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: stringWithFurigana(actualWord, furigana) }}
-    />
+    <div className={styles[containerCName]} style={style}>
+      <div
+        className={styles[cName]}
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: stringWithFurigana(actualWord, furigana) }}
+      />
+      {children && { ...children }}
+    </div>
   );
 };
 
 Furigana.propTypes = {
   cName: PropTypes.string,
+  children: PropTypes.element,
+  containerCName: PropTypes.string,
   reading: PropTypes.string.isRequired,
+  style: PropTypes.string,
   word: PropTypes.string.isRequired,
 };
 
 Furigana.defaultProps = {
   cName: '',
+  children: null,
+  containerCName: '',
+  style: {},
 };
 
 export default Furigana;

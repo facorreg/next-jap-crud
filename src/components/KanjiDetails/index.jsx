@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import Furigana from '@components/Furigana';
 import { kanjiPropTypes } from '@propTypes';
-import style from '@styles/Kanji.module.scss';
+import styles from '@styles/Kanji.module.scss';
 
 const KanjiDetails = ({ kanji }) => {
   if (!kanji) return null;
@@ -19,50 +19,50 @@ const KanjiDetails = ({ kanji }) => {
   } = kanji;
 
   return (
-    <div className={style.kanjiStyle}>
-      <div className={style.kanjiInfo}>
+    <div className={styles.kanjiStyle}>
+      <div className={styles.kanjiInfo}>
         {video ? (
           <video controls poster={poster}>
             <track kind="captions" />
             <source src={video} />
           </video>
         ) : (
-          <div className={style.kanji}>{character}</div>
+          <div className={styles.kanji}>{character}</div>
         )}
-        <div className={style.strokeCount}>{`Strokes: ${count}`}</div>
+        <div className={styles.strokeCount}>{`Strokes: ${count}`}</div>
       </div>
-      <div className={style.meanings}>
+      <div className={styles.meanings}>
         {meaning}
         <div>On: {onyomi || 'N/A'}</div>
         <div>Kun: {kunyomi || 'N/A'}</div>
-        <div className={style.strokes}>
-          <div className={style.imgContainer}>
+        <div className={styles.strokes}>
+          <div className={styles.imgContainer}>
             {images.map((url) => (
-              <div className={style.imgBorder}>
-                <div className={style.verticalLine} />
-                <div className={style.horizontalLine} />
+              <div className={styles.imgBorder}>
+                <div className={styles.verticalLine} />
+                <div className={styles.horizontalLine} />
                 <Image
                   layout="fixed"
                   height={100}
                   width={100}
                   src={url}
                   alt="kanji"
-                  className={style.strokeImage}
+                  className={styles.strokeImage}
                 />
               </div>
             ))}
           </div>
         </div>
       </div>
-      <div className={style.references}>
+      <div className={styles.references}>
         {jlpt && <div>JLPT: {jlpt}</div>}
         {grade && <div>grade: {grade}</div>}
       </div>
-      <div className={style.examples}>
-        {examples.map(({ audio, furigana, meaning: meaningStr, word }) => (
-          <div className={style.exContainer}>
+      <div className={styles.examples}>
+        {examples?.map(({ audio, furigana, meaning: meaningStr, word }) => (
+          <div className={styles.exContainer}>
             <Furigana word={word} reading={furigana} cName="exWord" />
-            <div className={style.exMeaning}>{meaningStr}</div>
+            <div className={styles.exMeaning}>{meaningStr}</div>
             {audio && (
               <audio controls>
                 <track kind="captions" />

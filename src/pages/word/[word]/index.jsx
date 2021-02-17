@@ -6,13 +6,27 @@ import Furigana from '@components/Furigana';
 import KanjiList from '@components/Kanji-list';
 import OtherForms from '@components/OtherForms';
 import WordSenses from '@components/WordSenses';
-import { kanjiPropTypes } from '@propTypes';
+import { examplePropTypes } from '@propTypes';
 import styles from '@styles/Word.module.scss';
 import { flattenDeep } from '@utils';
 
+const uniqBy = (array, callback) => {
+  return array.reduce((acc, el) => {
+    const found = acc.find((accEl) => callback(accEl, el));
+    if (found) {
+      return acc;
+    }
+
+    return [...acc, el];
+  }, []);
+};
+
 const WordPage = (props) => {
   const { words } = props;
-  const kanjiList = flattenDeep(words?.map(({ kanji }) => kanji));
+  const kanjiList = uniqBy(
+    flattenDeep(words?.map(({ kanjis }) => kanjis)),
+    ({ character }, { character: character2 }) => character === character2,
+  );
 
   return (
     <div className={styles.wordStyle}>
@@ -48,6 +62,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
+
   return {
     props: {
       words: res?.data,
@@ -68,7 +83,7 @@ WordPage.propTypes = {
       senses: PropTypes.arrayOf(
         PropTypes.shape({
           definitions: PropTypes.string,
-          examples: PropTypes.arrayOf(kanjiPropTypes.kanji),
+          examples: PropTypes.arrayOf(examplePropTypes),
           partsOfSpeech: PropTypes.string,
           tags: PropTypes.string,
         }),

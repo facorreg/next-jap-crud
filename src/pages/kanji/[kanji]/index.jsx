@@ -21,20 +21,12 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const res = await axios(encodeURI(`${apiEndPoint}/kanji/${context.params.kanji}`));
-  const { examples: exampleIds, ...kanji } = res?.data || {};
+  const kanji = res?.data || {};
 
-  let examples = [];
-  if (exampleIds && exampleIds.length) {
-    const uri = exampleIds.map((id) => `ids=${id}`).join('&');
-
-    const resEx = await axios(encodeURI(`${apiEndPoint}/examples?${uri}`));
-    examples = resEx?.data;
-  }
   return {
     props: {
       kanji: {
         ...kanji,
-        examples,
       },
     },
     revalidate: 1,

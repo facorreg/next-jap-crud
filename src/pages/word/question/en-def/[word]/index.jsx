@@ -11,20 +11,20 @@ const WordQuestion = (props) => {
   const { words } = props;
 
   if (!words) return null;
-  const sensesByWord = words.map(({ senses }) => senses.length);
+  const sensesByWord = words.map(({ senses }) => senses?.length);
 
   const [mainIndex, secondaryIndex] = ownKeyDownHandler(sensesByWord);
   // const mainIndex = 0;
   // const secondaryIndex = 0;
   return (
     <div className={styles.questionContainer}>
-      <div>{words[mainIndex].senses[secondaryIndex]?.definitions}</div>
+      <div>{(words[mainIndex]?.senses || [])[secondaryIndex]?.definitions}</div>
       <br />
       <div className={styles.infos}>
         word: {mainIndex + 1} / {words.length}
       </div>
       <div className={styles.infos}>
-        definition: {secondaryIndex + 1} / {words[mainIndex].senses.length}
+        definition: {secondaryIndex + 1} / {words[mainIndex].senses?.length || 1}
       </div>
     </div>
   );
@@ -45,6 +45,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
+  // console.log('qen', context.params.word);
 
   return {
     props: {

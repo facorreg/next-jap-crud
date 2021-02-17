@@ -9,6 +9,7 @@ import styles from '@styles/Question.module.scss';
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const WordQuestion = (props) => {
   const { words } = props;
+  // console.log(words);
 
   if (!words) return null;
   const readingsByWord = words.map(({ japanese }) => japanese.length);
@@ -17,13 +18,13 @@ const WordQuestion = (props) => {
 
   return (
     <div className={styles.questionContainer}>
-      <Furigana {...(words[mainIndex]?.japanese[secondaryIndex] || {})} cName="question" />
+      <Furigana {...((words[mainIndex]?.japanese || [])[secondaryIndex] || {})} cName="question" />
       <br />
       <div className={styles.infos}>
         word: {mainIndex + 1} / {words.length}
       </div>
       <div className={styles.infos}>
-        reading: {secondaryIndex + 1} / {words[mainIndex].japanese.length}
+        reading: {secondaryIndex + 1} / {words[mainIndex]?.japanese?.length || 1}
       </div>
     </div>
   );
@@ -44,6 +45,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
+  // console.log('q', context.params.word);
 
   return {
     props: {

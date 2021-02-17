@@ -1,4 +1,5 @@
+import examplePropTypes from './example';
 import kanjiPropTypes from './kanji';
+import tokenPropTypes from './token';
 
-// eslint-disable-next-line import/prefer-default-export
-export { kanjiPropTypes };
+export { kanjiPropTypes, examplePropTypes, tokenPropTypes };

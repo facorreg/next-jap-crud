@@ -1,0 +1,45 @@
+.speech-bubble-container {
+  display: none;
+  position: absolute;
+  bottom: 80px;
+  left: -30px;
+
+	background: inherit;
+}
+
+.speech-bubble {
+	position: relative;
+  z-index: 2;
+  // height: 100px;
+  width: auto;
+  padding: 25px;
+
+	border-radius: .4em;
+
+	background: inherit;
+  div {
+    display: inline-block;
+    min-width:100%;
+
+    white-space: nowrap;
+  }
+}
+
+.speech-bubble:after {
+	content: '';
+
+
+	position: absolute;
+  z-index: 2;
+	bottom: 0;
+	left: 42px;
+	width: 0;
+
+	height: 0;
+	margin-bottom: -11px;
+	margin-left: -11px;
+
+	border: 11px solid transparent;
+	border-bottom: 0;
+	border-top-color: inherit;
+}

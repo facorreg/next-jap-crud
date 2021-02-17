@@ -6950,6 +6950,11 @@ walkdir@^0.4.1:
   resolved "https://registry.yarnpkg.com/walkdir/-/walkdir-0.4.1.tgz#dc119f83f4421df52e3061e514228a2db20afa39"
   integrity sha512-3eBwRyEln6E1MSzcxcVpQIhRG8Q1jLvEqRmCZqS3dsfXEDR/AhOF4d+jHg1qvDCpYaVRZjENPQyrVxAkQqxPgQ==
 
+wanakana@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/wanakana/-/wanakana-4.0.2.tgz#a7d60186724a56fd50e6e9c224628c09294901d8"
+  integrity sha512-lBFtnLJhTpp5wQBdH7TrOHhLxqmUabAfL86plNN8+iffyhosjZyx+kkO8KEBGR8zWH5nxSQ67oyx3W/lcEC8sg==
+
 warning@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
