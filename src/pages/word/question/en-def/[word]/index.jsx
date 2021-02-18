@@ -10,7 +10,7 @@ import styles from '@styles/Question.module.scss';
 const WordQuestion = (props) => {
   const { words } = props;
 
-  if (!words) return null;
+  if (!words) return <div>Could not find the word you were looking for</div>;
   const sensesByWord = words.map(({ senses }) => senses?.length);
 
   const [mainIndex, secondaryIndex] = ownKeyDownHandler(sensesByWord);

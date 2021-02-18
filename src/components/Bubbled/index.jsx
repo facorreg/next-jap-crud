@@ -3,6 +3,7 @@ import { toHiragana } from 'wanakana';
 import Furigana from '@components/Furigana';
 import { tokenPropTypes } from '@propTypes';
 import styles from '@styles/Bubbled.module.scss';
+import { filterEmpty } from '@utils';
 
 /*
   Attention aux effets de bord du CSS
@@ -37,6 +38,10 @@ const Bubbled = ({ token: rawToken }) => {
     return { ...acc, [key]: rawToken[key] };
   }, {});
 
+  const pos = filterEmpty([token.pos, token.posDetail1, token.posDetail2, token.posDetail3]).join(
+    ', ',
+  );
+
   const colorStyleName = Object.keys(mainPos).find((e) => token.pos?.includes(e)) || 'other';
   const colorStyle = mainPos[colorStyleName];
 
@@ -57,8 +62,8 @@ const Bubbled = ({ token: rawToken }) => {
             {token.conjugatedType && <div>conjugated type: {token.conjugatedType}</div>}
             {token.conjugatedForm && <div>conjugated form: {token.conjugatedForm}</div>}
             <div>
-              part of speech:
-              {[token.pos, token.posDetail1, token.posDetail2, token.posDetail3].join(', ')}
+              {'part of speech: '}
+              {pos}
             </div>
             <div>reading: {token.reading}</div>
             {token.pronounciation && <div>pronounciation: {token.pronounciation}</div>}

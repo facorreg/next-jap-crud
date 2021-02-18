@@ -27,7 +27,7 @@ const Furigana = ({ children, cName, containerCName, reading, style, word }) => 
   const actualWord = word || reading;
   const furigana = word ? reading : '';
 
-  if (!actualWord) return <div />;
+  if (!actualWord) return null;
 
   return (
     <div className={styles[containerCName]} style={style}>
@@ -46,7 +46,8 @@ Furigana.propTypes = {
   children: PropTypes.element,
   containerCName: PropTypes.string,
   reading: PropTypes.string.isRequired,
-  style: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  style: PropTypes.object,
   word: PropTypes.string.isRequired,
 };
 

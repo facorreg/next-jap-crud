@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --debug",
-    "start": "next start -p 3005",
+    "start": "next start",
     "lint": "eslint --fix --ignore-path .gitignore \"./**/*.js\" \"./**/*.jsx\"",
     "format": "prettier --ignore-path .gitignore --write '**/*.{js,jsx,css,md,json,scss}'",
     "validate": "yarn lint"
@@ -20,6 +20,7 @@
     "proptypes": "^1.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-icons": "^4.2.0",
     "react-modal": "^3.12.1",
     "sass": "^1.32.5",
     "uuid": "^8.3.2",

@@ -3,8 +3,6 @@
   position: absolute;
   bottom: 80px;
   left: -30px;
-
-	background: inherit;
 }
 
 .speech-bubble {
@@ -14,9 +12,8 @@
   width: auto;
   padding: 25px;
 
-	border-radius: .4em;
+	border-radius: 25px;
 
-	background: inherit;
   div {
     display: inline-block;
     min-width:100%;

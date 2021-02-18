@@ -35,7 +35,7 @@ const WordPage = (props) => {
           const [{ reading, word }, ...rest] = japanese;
           return (
             <div className={styles.singleWord} key={uuidv4()}>
-              <Furigana word={word} reading={reading} cName="dictionaryWord" />
+              <Furigana word={word} reading={reading} containerCName="dictionaryWord" />
               <WordSenses senses={senses} />
               {rest.length ? <OtherForms japanese={rest} /> : null}
             </div>

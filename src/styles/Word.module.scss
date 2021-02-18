@@ -132,6 +132,30 @@
   }
 }
 
+.wExListContainer {
+  position: relative;
+  width: 100%;
+}
+.wExListArrow {
+  position: absolute;
+  // left: 10%;
+  width: 80%;
+
+  border-top: 1px solid $primary-color;
+
+  color: $primary-color;
+
+  cursor: pointer;
+}
+
+.wExListArrowClose {
+  bottom: -75px;
+}
+
+.wExListArrowOpen {
+  top: -24px;
+}
+
 .wExfurignaContainer {
   display: inline-block;
   position: relative;

@@ -12,7 +12,7 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     left: '50%',
-    maxHeight: '100vh',
+    maxHeight: '80vh',
     marginRight: '-50%',
     padding: '0px',
     overflowY: 'auto',
@@ -22,6 +22,8 @@ const customStyles = {
     border: '1px solid #0a5e8f',
   },
   overlay: {
+    zIndex: 100,
+
     background: 'rgba(0, 0, 0, 0.85)',
   },
 };
