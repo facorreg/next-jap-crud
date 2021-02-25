@@ -1,14 +1,16 @@
 import { useAtom } from 'jotai';
 
-import { openModalAtom } from '@atoms';
+import { openModalAtom, meAtom } from '@atoms';
+import useAuth from '@hooks/useAuth';
 import styles from '@styles/Header.module.scss';
 
 import MultiLanguageButton from './MutliLanguageButton';
 
 const Header = () => {
   const [, openModal] = useAtom(openModalAtom);
+  const [, setMe] = useAtom(meAtom);
   const openModalHandler = (modalName) => () => openModal({ modalName });
-  const isAuthenticated = false;
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className={styles.header}>
@@ -27,7 +29,12 @@ const Header = () => {
         </div>
       ) : (
         <div className={styles.menu}>
-          <MultiLanguageButton className={styles.menuButton} en="LOGOUT" jp="サインアウト" />
+          <MultiLanguageButton
+            className={styles.menuButton}
+            en="LOGOUT"
+            jp="サインアウト"
+            onClickHandler={() => setMe()}
+          />
         </div>
       )}
     </div>

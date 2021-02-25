@@ -1,11 +1,13 @@
 import PropTypes from 'proptypes';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from '@styles/Header.module.scss';
 
 const MultiLanguageButton = ({ en, jp, onClickHandler }) => {
   const [message, setMessage] = useState(en);
-
+  useEffect(() => {
+    setMessage(en);
+  }, [en]);
   const changeMessage = (msg) => () => setMessage(msg);
 
   return (

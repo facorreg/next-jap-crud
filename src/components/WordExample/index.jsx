@@ -2,7 +2,7 @@ import Bubbled from '@components/Bubbled';
 import { examplePropTypes } from '@propTypes';
 import styles from '@styles/Word-example.module.scss';
 
-const WordExample = ({ en, tokens }) => {
+const WordExample = ({ en, tokens = [] }) => {
   return (
     <div className={styles.wExample}>
       <div>{en}</div>

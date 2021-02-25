@@ -1,15 +1,24 @@
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import PropTypes from 'proptypes';
 
 import Furigana from '@components/Furigana';
+import Loader from '@components/Loader';
 import ownKeyDownHandler from '@hooks/ownDirKeyDownHandler';
-import { kanjiPropTypes } from '@propTypes';
+import { examplePropTypes } from '@propTypes';
 import styles from '@styles/Question.module.scss';
-
 // eslint-disable-next-line sonarjs/cognitive-complexity
 const WordQuestion = (props) => {
-  const { words } = props;
-  // console.log(words);
+  const { error, loaded, words: rawWords } = props;
+  const router = useRouter();
+  const { reading } = router.query;
+
+  if (!loaded) return <Loader />;
+  if (error) return <div>error</div>;
+
+  const words = reading
+    ? rawWords.filter(({ japanese } = {}) => japanese?.find(({ reading: jr }) => reading === jr))
+    : rawWords;
 
   if (!words) return null;
   const readingsByWord = words.map(({ japanese }) => japanese.length);
@@ -44,18 +53,30 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
-  const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
-  // console.log('q', context.params.word);
+  try {
+    const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
 
-  return {
-    props: {
-      words: res?.data,
-    },
-    revalidate: 1,
-  };
+    return {
+      props: {
+        loaded: true,
+        words: res?.data,
+      },
+      revalidate: 1,
+    };
+  } catch {
+    return {
+      props: {
+        error: 'An error occured',
+        loaded: true,
+        words: null,
+      },
+    };
+  }
 };
 
 WordQuestion.propTypes = {
+  error: PropTypes.string,
+  loaded: PropTypes.bool,
   words: PropTypes.arrayOf(
     PropTypes.shape({
       japanese: PropTypes.arrayOf(
@@ -67,13 +88,19 @@ WordQuestion.propTypes = {
       senses: PropTypes.arrayOf(
         PropTypes.shape({
           definitions: PropTypes.string,
-          examples: PropTypes.arrayOf(kanjiPropTypes.kanji),
+          examples: PropTypes.arrayOf(examplePropTypes),
           partsOfSpeech: PropTypes.string,
           tags: PropTypes.string,
         }),
       ),
     }),
-  ).isRequired,
+  ),
+};
+
+WordQuestion.defaultProps = {
+  error: '',
+  loaded: false,
+  words: null,
 };
 
 export default WordQuestion;

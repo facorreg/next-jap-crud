@@ -1,45 +1,82 @@
-/* eslint-disable react/button-has-type */
-import PropTypes from 'proptypes';
-import React from 'react';
-// import { promesify } from 'utils';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
+import axios from 'axios';
+import { useAtom } from 'jotai';
+import qs from 'qs';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+
+// eslint-disable-next-line import/no-cycle
+import { openModalAtom, closeModalAtom, meAtom } from '@atoms';
 import Common from '@components/Common.form';
 import styles from '@styles/Common.form.module.scss';
+import { getEnv } from '@utils';
 
-// const refsSchema = [
-//   {
-//     name: 'identifier',
-//     // validator: (str) =>
-//     // promesify(str.length, 'Please enter either your e-mail or username to login'),
-//   },
-//   {
-//     name: 'password',
-//     // validator: (str) => promesify(str.length, 'Please provide your password to login'),
-//   },
-// ];
+const Login = (props) => {
+  const { errors, handleSubmit, register } = useForm();
+  const [, openModal] = useAtom(openModalAtom);
+  const [, closeModal] = useAtom(closeModalAtom);
+  const [, setMe] = useAtom(meAtom);
 
-const Login = ({ openModal }) => {
-  // const connect = useConnectionDataHandler('login', 'Unable to connect user', rest);
-  // const { errorMessage, handleSubmit, refs } = useGeneratedInputRefs(refsSchema, connect, {
-  //   noWhite: true,
-  // });
-  const openModalHandler = (modalName) => () => openModal(modalName);
-  const handleSubmit = (e) => e.preventDefault();
-  const errorMessage = '';
+  const openModalHandler = () => {
+    // @todo: forgot password modal
+    openModal({ modalName: 'register', props });
+  };
 
+  const onSubmit = async (data) => {
+    try {
+      const url = `${getEnv('API_ENDPOINT', 'http://localhost:4000')}/login`;
+
+      const config = {
+        data: qs.stringify(data),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        method: 'post',
+        url,
+      };
+
+      const me = await axios(config);
+      closeModal();
+      setMe(me?.data);
+    } catch (err) {
+      //
+    }
+  };
+
+  const errorMsg = Object.keys(errors).find((key) => errors[key]);
   return (
     <Common imgSrc="/torii.jpg">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2>LOGIN</h2>
         <div className={styles.inputContainer}>
-          <input name="identifier" placeholder="Username or E-mail Address" type="text" />
-          <input name="password" placeholder="Password" type="password" />
+          <input
+            name="identifier"
+            placeholder="Username or E-mail Address"
+            type="text"
+            ref={register({
+              maxLength: 20,
+              minLength: 4,
+              required: true,
+            })}
+          />
+          <input
+            name="password"
+            placeholder="Password"
+            type="password"
+            ref={register({
+              maxLength: 60,
+              minLength: 4,
+              required: true,
+            })}
+          />
         </div>
         <div className={styles.formError}>
-          <div className={styles.errorMessage}>{errorMessage}</div>
+          {errorMsg && <div className={styles.errorMessage}>{errorMsg}</div>}
         </div>
         <div className={styles.links}>
-          <button onClick={openModalHandler('forgot')}>I forgot my password</button>
+          <div onClick={openModalHandler}>I forgot my password</div>
         </div>
         <input
           className={styles.submit}
@@ -51,10 +88,6 @@ const Login = ({ openModal }) => {
       </form>
     </Common>
   );
-};
-
-Login.propTypes = {
-  openModal: PropTypes.func.isRequired,
 };
 
 export default Login;

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { atom } from 'jotai';
 
 import ForgotForm from '@components/Forgot.form';

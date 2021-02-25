@@ -1,14 +1,27 @@
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import PropTypes from 'proptypes';
 
 // import Furigana from '@components/Furigana';
+import Loader from '@components/Loader';
 import ownKeyDownHandler from '@hooks/ownDirKeyDownHandler';
-import { kanjiPropTypes } from '@propTypes';
+import { examplePropTypes } from '@propTypes';
 import styles from '@styles/Question.module.scss';
-
 // eslint-disable-next-line sonarjs/cognitive-complexity
-const WordQuestion = (props) => {
-  const { words } = props;
+const WordQuenstionEn = (props) => {
+  const { error, loaded, words: rawWords } = props;
+
+  if (!loaded) return <Loader />;
+  if (error) return <div>error</div>;
+
+  const router = useRouter();
+  const { reading } = router.query;
+
+  const words = reading
+    ? rawWords.filter(({ japanese } = {}) => japanese?.find(({ reading: jr }) => reading === jr))
+    : rawWords;
+
+  if (!words) return null;
 
   if (!words) return <div>Could not find the word you were looking for</div>;
   const sensesByWord = words.map(({ senses }) => senses?.length);
@@ -24,7 +37,7 @@ const WordQuestion = (props) => {
         word: {mainIndex + 1} / {words.length}
       </div>
       <div className={styles.infos}>
-        definition: {secondaryIndex + 1} / {words[mainIndex].senses?.length || 1}
+        definition: {secondaryIndex + 1} / {words[mainIndex]?.senses?.length || 1}
       </div>
     </div>
   );
@@ -44,18 +57,30 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
-  const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
-  // console.log('qen', context.params.word);
+  try {
+    const res = await axios(encodeURI(`http://localhost:4000/word/${context.params.word}`));
 
-  return {
-    props: {
-      words: res?.data,
-    },
-    revalidate: 1,
-  };
+    return {
+      props: {
+        loaded: true,
+        words: res?.data,
+      },
+      revalidate: 1,
+    };
+  } catch {
+    return {
+      props: {
+        error: 'An error occured',
+        loaded: true,
+        words: null,
+      },
+    };
+  }
 };
 
-WordQuestion.propTypes = {
+WordQuenstionEn.propTypes = {
+  error: PropTypes.string,
+  loaded: PropTypes.bool,
   words: PropTypes.arrayOf(
     PropTypes.shape({
       japanese: PropTypes.arrayOf(
@@ -67,13 +92,19 @@ WordQuestion.propTypes = {
       senses: PropTypes.arrayOf(
         PropTypes.shape({
           definitions: PropTypes.string,
-          examples: PropTypes.arrayOf(kanjiPropTypes.kanji),
+          examples: PropTypes.arrayOf(examplePropTypes),
           partsOfSpeech: PropTypes.string,
           tags: PropTypes.string,
         }),
       ),
     }),
-  ).isRequired,
+  ),
 };
 
-export default WordQuestion;
+WordQuenstionEn.defaultProps = {
+  error: '',
+  loaded: false,
+  words: null,
+};
+
+export default WordQuenstionEn;

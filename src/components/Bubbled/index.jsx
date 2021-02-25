@@ -52,7 +52,7 @@ const Bubbled = ({ token: rawToken }) => {
     <span>
       <Furigana
         reading={toHiragana(token.reading)}
-        word={token.basicForm}
+        word={token.surfaceForm}
         containerCName="wExfurignaContainer"
         style={bcg}
       >
