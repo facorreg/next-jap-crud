@@ -1,0 +1,60 @@
+@import './colors.scss';
+
+.notesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  margin: auto;
+
+  .notesList {
+    border: 1px solid $primary-color;
+
+    th {
+      background-color: $darkened-primary-color;
+    }
+  
+    .actions {
+      width: 25%;
+    }
+
+    td.actions div {
+      display: flex;
+      justify-content: flex-end;
+
+      
+      .icon {
+        padding: 0 2px;
+
+        cursor: pointer;
+      }
+
+      .invertColor {
+        filter: invert(1);
+      }
+
+      .grayColor {
+        filter: invert(0.5);
+      }
+    }
+  }
+
+
+  button {
+    margin: 50px auto;
+    padding: 10px;
+
+    border: 1px solid $primary-color;
+    outline: none;
+
+    background: inherit;
+
+    color: inherit;
+    font: inherit;
+
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 1px 6px 1px $primary-color; 
+    }
+  }
+}
