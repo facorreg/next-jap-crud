@@ -3,17 +3,8 @@ import { useAtom } from 'jotai';
 
 import { meAtom } from '@atoms';
 
-const axiosInstance = (token) => (options) => {
-  // const defaultOptions = {
-  //   baseURL: process.env.REACT_APP_API_PATH,
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   method: 'get',
-  // };
-
-  // Create instance
-  const instance = axios.create(options);
+const axiosInstance = (token) => {
+  const instance = axios.create();
 
   // Set the AUTH token for any request
   instance.interceptors.request.use((config) => {

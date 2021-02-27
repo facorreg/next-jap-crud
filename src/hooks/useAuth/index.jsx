@@ -13,6 +13,7 @@ const useAuth = () => {
   if (!decoded) return { isAuthenticated: false };
   return {
     isAuthenticated: true,
+    userId: decoded.id,
   };
 };
 

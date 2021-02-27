@@ -11,6 +11,10 @@
     "validate": "yarn lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.19.1",
+    "@editorjs/header": "^2.6.1",
+    "@editorjs/list": "^1.6.2",
+    "@editorjs/paragraph": "^2.8.0",
     "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "dotenv": "^8.2.0",
@@ -23,6 +27,7 @@
     "qs": "^6.9.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-editor-js": "^1.9.0",
     "react-hook-form": "^6.15.4",
     "react-icons": "^4.2.0",
     "react-modal": "^3.12.1",
